@@ -15,7 +15,7 @@ public class Board extends JFrame {
     private boolean singlePlayerMode = false; // Set true to enable AI
 
     public Board() {
-        setTitle("Tic Tac Toe");
+        setTitle("Tic Tac Toe by SAROJ DHITAL");
         setSize(400, 500);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
