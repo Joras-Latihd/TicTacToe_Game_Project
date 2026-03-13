@@ -23,7 +23,6 @@ public class GameLogic {
     }
 
     public boolean checkWin() {
-        // Check rows, columns, diagonals
         for (int i = 0; i < 3; i++) {
             if (board[i][0] != '\0' && board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
                 gameOver = true;
@@ -69,4 +68,34 @@ public class GameLogic {
 
     public int getScoreX() { return scoreX; }
     public int getScoreO() { return scoreO; }
+
+    // ✅ NEW: Returns a copy of the board (used by AIPlayer)
+    public char[][] getBoardCopy() {
+        char[][] copy = new char[3][3];
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                copy[i][j] = board[i][j];
+        return copy;
+    }
+
+    // ✅ NEW: Returns winning cell coordinates (used by Board to highlight)
+    public int[][] getWinningCombination() {
+        // Check rows
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] != '\0' && board[i][0] == board[i][1] && board[i][1] == board[i][2])
+                return new int[][]{{i,0},{i,1},{i,2}};
+        }
+        // Check columns
+        for (int j = 0; j < 3; j++) {
+            if (board[0][j] != '\0' && board[0][j] == board[1][j] && board[1][j] == board[2][j])
+                return new int[][]{{0,j},{1,j},{2,j}};
+        }
+        // Check diagonals
+        if (board[0][0] != '\0' && board[0][0] == board[1][1] && board[1][1] == board[2][2])
+            return new int[][]{{0,0},{1,1},{2,2}};
+        if (board[0][2] != '\0' && board[0][2] == board[1][1] && board[1][1] == board[2][0])
+            return new int[][]{{0,2},{1,1},{2,0}};
+
+        return null;
+    }
 }
